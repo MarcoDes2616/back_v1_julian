@@ -5,7 +5,7 @@ const signatureRouter = require('./signature.routes');
 const router = express.Router();
 
 // colocar las rutas aquí
-router.use("/dataStudent ", studentRouter)
+router.use("/dataStudent", studentRouter)
 
 router.use("/dataTeacher", teacherRouter)
 
