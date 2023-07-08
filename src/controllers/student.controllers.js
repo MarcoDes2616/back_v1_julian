@@ -1,8 +1,14 @@
 const catchError = require('../utils/catchError');
 const Students = require('../models/Students');
+const Signature = require('../models/Signature');
 
 const getAll = catchError(async(req, res) => {
-    const results = await Students.findAll();
+    const results = await Students.findAll({
+        include: {
+            model: Signature,
+            attributes: ["name"]
+        }
+    });
     return res.json(results);
 });
 
@@ -34,10 +40,19 @@ const update = catchError(async(req, res) => {
     return res.json(result[1][0]);
 });
 
+const setStudentsCourses = catchError(async(req, res) => {
+    const {id} = req.params;
+    const student = await Students.findByPk(id)
+    await student.setSignature(req.body)
+    const courses = await student.getSignature()
+    res.status(201).json(courses)
+})
+
 module.exports = {
     getAll,
     create,
     getOne,
     remove,
-    update
+    update,
+    setStudentsCourses
 }

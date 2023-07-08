@@ -19,7 +19,7 @@ const Teacher = sequelize.define('teachers', {
         allowNull: false,
       },
       phone: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       numId: {
